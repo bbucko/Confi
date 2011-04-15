@@ -1,15 +1,9 @@
 <% include '/WEB-INF/includes/header.gtpl' %>
 
-<h1>Welcome</h1>
+<ul data-role="listview" data-theme="g">
+    <li><a href="/presenters">Presenters</a></li>
+    <li><a href="/talks">Talks</a></li>
 
-<p>
-    Congratulations, you've just created your first 
-    <a href="http://gaelyk.appspot.com">Gaelyk</a> application.
-</p>
-
-<p>
-    Click <a href="datetime.groovy">here</a> to view the current date/time.
-</p>
+</ul>
 
 <% include '/WEB-INF/includes/footer.gtpl' %>
-
