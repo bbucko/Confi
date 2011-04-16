@@ -1,13 +1,16 @@
 package pl.iogreen.confi.model
 
-class Presenter {
-    String id
+import groovyx.gaelyk.obgaektify.ObgaektifiableLongId
+import javax.persistence.Transient
+
+class Presenter extends ObgaektifiableLongId implements Serializable {
 
     String name
     String surname
     String description
 
-    String fullName() {
+    @Transient
+    String getFullName() {
         "${name} ${surname}"
     }
 }
