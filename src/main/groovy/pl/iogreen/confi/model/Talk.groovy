@@ -18,4 +18,18 @@ class Talk extends ObgaektifiableLongId implements Serializable {
     Presenter getPresenter() {
         Presenter.fetch(presenterKey.id)
     }
+
+    @Transient
+    List validate() {
+        def errors = []
+
+        if (!title) {
+            errors << [field: "title", message: "Title is required"]
+        }
+
+        if (!description) {
+            errors << [field: "description", message: "Description is required"]
+        }
+        return errors
+    }
 }

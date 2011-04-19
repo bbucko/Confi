@@ -10,3 +10,5 @@
 </head>
 
 <body>
+<div data-role="page">
+    <div data-role="content" data-theme="b">
