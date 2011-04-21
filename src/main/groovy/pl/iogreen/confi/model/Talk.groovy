@@ -3,12 +3,13 @@ package pl.iogreen.confi.model
 import com.googlecode.objectify.Key
 import groovyx.gaelyk.obgaektify.ObgaektifiableLongId
 import javax.persistence.Transient
+import pl.iogreen.confi.validation.Error
 
-class Talk extends ObgaektifiableLongId implements Serializable {
+class Talk extends ObgaektifiableLongId implements Serializable, Validatable {
 
     String title
     String description
-    String shortDescription
+
     Date from
     Date to
 
@@ -20,15 +21,20 @@ class Talk extends ObgaektifiableLongId implements Serializable {
     }
 
     @Transient
-    List validate() {
+    @Override
+    List<Error> validate() {
         def errors = []
 
         if (!title) {
-            errors << [field: "title", message: "Title is required"]
+            errors << new Error(field: "title", message: "Title is required")
         }
 
         if (!description) {
-            errors << [field: "description", message: "Description is required"]
+            errors << new Error(field: "description", message: "Description is required")
+        }
+
+        if (to < from) {
+            errors << new Error(field: "to", message: "Date 'To' cannot be later then from")
         }
         return errors
     }

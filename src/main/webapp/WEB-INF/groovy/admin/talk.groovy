@@ -13,7 +13,7 @@ if (params.id) {
         request.talk = new Talk()
 
     } else if (request.method == "POST") {
-        def talk = new Talk(title: params.title, description: params.description, presenterKey: new Key<Presenter>(Presenter.class, params.presenterId.toLong()), shortDescription: "", from: new Date(), to: new Date())
+        def talk = new Talk(title: params.title, description: params.description, presenterKey: new Key<Presenter>(Presenter.class, params.presenterId as Long), from: new Date(), to: new Date())
         request.talk = talk
 
         if (talk.validate()) {
