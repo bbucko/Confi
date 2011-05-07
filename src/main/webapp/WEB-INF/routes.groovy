@@ -1,4 +1,4 @@
-get "/favicon.ico", redirect: "/images/gaelyk-small-favicon.png"
+get "/", forward: "/index.groovy"
 
 get "/presenters", forward: "/presenters.groovy"
 get "/presenters/*", forward: "/presenters.groovy"
@@ -23,5 +23,7 @@ post "/admin/presenter", forward: "/admin/presenter.groovy"
 
 get "/admin/presenter/@id", forward: "/admin/presenter.groovy?id=@id"
 post "/admin/presenter/@id", forward: "/admin/presenter.groovy?id=@id"
+
+get "/favicon.ico", redirect: "/images/gaelyk-small-favicon.png"
 
 get "*", forward: "/notFound.groovy"
