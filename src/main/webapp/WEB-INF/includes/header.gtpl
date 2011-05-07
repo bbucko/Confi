@@ -14,9 +14,9 @@
 <body>
 
 <div data-role="page">
-    <div data-role="header" data-theme="b">
+    <div data-role="header" data-theme="a">
         <h1><%= request.title ?: "Page Title"%></h1>
         <a href="/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
     </div>
-
+    
     <div data-role="content" data-theme="b">

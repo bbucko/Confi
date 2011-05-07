@@ -11,7 +11,7 @@
     <table>
         <tr>
             <td><label for="title">Title of the talk</label></td>
-            <td><input type="text" name="title" id="title" value="${request.talk?.title ?: ""}"/></td>
+            <td><input type="text" name="title" id="title" required value="${request.talk?.title ?: ""}"/></td>
         </tr>
         <tr>
             <td><label for="description">Description</label></td>
@@ -27,6 +27,14 @@
                 </select>
 
             </td>
+        </tr>
+        <tr>
+            <td><label for="dateFrom">Date from</label></td>
+            <td><input type="datetime-local" name="dateFrom" id="dateFrom" value="${request.talk?.from ?: ""}"></td>
+        </tr>
+        <tr>
+            <td><label for="dateTo">Date to</label></td>
+            <td><input type="datetime-local" name="dateTo" id="dateTo" value="${request.talk?.to ?: ""}"></td>
         </tr>
         <tr>
             <td></td>

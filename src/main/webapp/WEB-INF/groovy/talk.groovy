@@ -7,4 +7,4 @@ request.footer = "Footer"
 
 request.talk = talk
 
-forward '/talk.gtpl'
+forward '/WEB-INF/views//talk.gtpl'
