@@ -1,4 +1,4 @@
 request.title = "Presenters"
 request.footer = "Footer"
 
-forward '/presenters.gtpl'
+forward '/WEB-INF/views/presenters.gtpl'
