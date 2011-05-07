@@ -3,7 +3,11 @@ get "/", forward: "/index.groovy"
 get "/presenters", forward: "/PresentersController.groovy"
 get "/presenters/*", forward: "/PresentersController.groovy"
 
+get "/presenter/@id", forward: "/PresenterController.groovy?id=@id"
+
 get "/talks", forward: "/TalksController.groovy"
+get "/talks/*", forward: "/TalksController.groovy"
+
 get "/talk/@id", forward: "/TalkController.groovy?id=@id"
 
 get "/admin", forward: "/admin/index.groovy"

@@ -3,16 +3,14 @@ import pl.iogreen.confi.model.Talk
 request.title = "Talks"
 request.footer = "Footer"
 
-def todayStart = new Date() - 100
-def todayEnd = new Date() + 1
+def today = new Date()
+today.clearTime()
+
+def foundTodayTalks = Talk.search(filter: ["from >= ": today, "from < ": today + 1], sort: ["title"])
+//def foundTomorrowTalks = Talk.search(filter: ["from >= ": today + 1, "from < ": today + 2])
 
 request.talks = [
-        "today": Talk.search(
-                filter: [
-                        "dateFrom >= ": todayStart.format("%F 00:00:00"),
-                        "dateFrom < ": todayEnd.format("%F 00:00:00")
-                ]
-        )
+        "today": foundTodayTalks.groupBy {Talk talk -> talk.from.format("HH:00")}
 ]
 
 forward '/WEB-INF/views/talks.gtpl'

@@ -6,14 +6,27 @@ import pl.iogreen.confi.model.Presenter
 
 if (params.id) {
     log.info "update presenter ${params.id}"
-    request.presenter = Presenter.fetch(params.id)
+    def presenter = Presenter.fetch(params.id)
+    request.presenter = presenter
 
     if (request.method == "GET") {
         forward '/WEB-INF/views/admin/updatePresenter.gtpl'
     } else {
-        redirect "/admin/presenters"
+        presenter.description = params.description
+        presenter.surname = params.surname
+        presenter.name = params.name
+
+        request.errors = presenter.validate()
+        if (!request.errors) {
+            dao.put presenter
+            assert presenter.id != null
+
+            log.info "updated Talk"
+            redirect "/admin/presenters"
+            return
+        }
+        forward '/WEB-INF/views/admin/createPresenter.gtpl'
     }
-    return
 } else {
     if (request.method == "GET") {
         log.info "create Presenter"
@@ -35,5 +48,4 @@ if (params.id) {
     }
 
     forward '/WEB-INF/views/admin/createPresenter.gtpl'
-    return
 }
