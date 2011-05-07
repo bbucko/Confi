@@ -10,22 +10,19 @@ if (params.id) {
 
     if (request.method == "GET") {
         forward '/WEB-INF/views/admin/updatePresenter.gtpl'
-        return
     } else {
-        println params
         redirect "/admin/presenters"
-        return
     }
+    return
 } else {
     if (request.method == "GET") {
         log.info "create Presenter"
         request.presenter = new Presenter()
     } else if (request.method == "POST") {
         def presenter = new Presenter(name: params.name, surname: params.surname, description: params.description, url: params.url as Link, email: params.email as Email)
+        request.errors = presenter.validate()
 
-        if (presenter.validate()) {
-            request.errors = presenter.validate()
-        } else {
+        if (request.errors) {
             dao.put presenter
             assert presenter.id != null
 
