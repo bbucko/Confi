@@ -4,17 +4,33 @@ import com.googlecode.objectify.Key
 import pl.iogreen.confi.model.Presenter
 import pl.iogreen.confi.model.Talk
 
+request.presenters = Presenter.search()
+
 if (params.id) {
     log.info "update talk ${params.id}"
-    request.talk = Talk.fetch(params.id)
+    def talk = Talk.fetch(params.id)
+    request.talk = talk
 
     if (request.method == "GET") {
         forward '/WEB-INF/views/admin/updateTalk.gtpl'
-        return
     } else {
-        println params
-        redirect "/admin/talks"
-        return
+        talk.title = params.title
+        talk.description = params.description
+        talk.presenterKey = params.presenterId ? new Key<Presenter>(Presenter.class, params.presenterId as Long) : null
+        talk.from = params.dateFrom ? Date.parse("yyyy-MM-dd'T'kk:mm'Z'", params.dateFrom) : null
+        talk.to = params.dateTo ? Date.parse("yyyy-MM-dd'T'kk:mm'Z'", params.dateTo) : null
+
+        request.errors = talk.validate()
+        if (!request.errors) {
+            dao.put talk
+            assert talk.id != null
+
+            log.info "updated Talk"
+            redirect "/admin/talks"
+            return
+        }
+
+        forward '/WEB-INF/views/admin/updateTalk.gtpl'
     }
 } else {
     if (request.method == "GET") {
@@ -26,10 +42,9 @@ if (params.id) {
         def to = params.dateTo ? Date.parse("yyyy-MM-dd'T'kk:mm'Z'", params.dateTo) : null
 
         def talk = new Talk(title: params.title, description: params.description, presenterKey: presenterKey, from: from, to: to)
+        request.errors = talk.validate()
 
-        if (talk.validate()) {
-            request.errors = talk.validate()
-        } else {
+        if (!request.errors) {
             dao.put talk
             assert talk.id != null
 
@@ -41,7 +56,5 @@ if (params.id) {
         request.talk = talk
     }
 
-    request.presenters = Presenter.search()
     forward '/WEB-INF/views/admin/createTalk.gtpl'
-    return
 }

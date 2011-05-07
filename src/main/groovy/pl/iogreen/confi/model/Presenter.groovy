@@ -22,6 +22,7 @@ class Presenter extends ObgaektifiableLongId implements Serializable, Validatabl
     @Transient
     @Override
     List<Error> validate() {
-        []
+        def errors = []
+        return errors
     }
 }

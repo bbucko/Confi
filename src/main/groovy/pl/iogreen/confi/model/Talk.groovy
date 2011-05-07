@@ -45,7 +45,7 @@ class Talk extends ObgaektifiableLongId implements Serializable, Validatable {
             errors << new Error(field: "to", message: "Date 'To' cannot be later then from")
         }
 
-        if(!presenterKey) {
+        if (!presenterKey) {
             errors << new Error(field: "presenter", message: "Presenter is required")
         }
 
