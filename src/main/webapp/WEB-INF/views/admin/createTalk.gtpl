@@ -30,11 +30,11 @@
         </tr>
         <tr>
             <td><label for="dateFrom">Date from</label></td>
-            <td><input type="datetime-local" name="dateFrom" id="dateFrom" value="${request.talk?.from ?: ""}"></td>
+            <td><input type="datetime" name="dateFrom" id="dateFrom" value="${request.talk?.from?.format("yyyy-MM-dd'T'kk:mm'Z'") ?: ""}"></td>
         </tr>
         <tr>
             <td><label for="dateTo">Date to</label></td>
-            <td><input type="datetime-local" name="dateTo" id="dateTo" value="${request.talk?.to ?: ""}"></td>
+            <td><input type="datetime" name="dateTo" id="dateTo" value="${request.talk?.to?.format("yyyy-MM-dd'T'kk:mm'Z'") ?: ""}"></td>
         </tr>
         <tr>
             <td></td>

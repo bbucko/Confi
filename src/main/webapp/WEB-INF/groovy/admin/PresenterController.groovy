@@ -1,6 +1,8 @@
-import pl.iogreen.confi.model.Presenter
-import com.google.appengine.api.datastore.Link
+package admin
+
 import com.google.appengine.api.datastore.Email
+import com.google.appengine.api.datastore.Link
+import pl.iogreen.confi.model.Presenter
 
 if (params.id) {
     log.info "update presenter ${params.id}"

@@ -1,3 +1,5 @@
+package admin
+
 import pl.iogreen.confi.model.Talk
 
 request.talks = [

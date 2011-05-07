@@ -1,3 +1,5 @@
+package admin
+
 /**
   * @author Błażej Bucko
   */

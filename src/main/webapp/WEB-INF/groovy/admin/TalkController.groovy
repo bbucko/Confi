@@ -1,3 +1,5 @@
+package admin
+
 import com.googlecode.objectify.Key
 import pl.iogreen.confi.model.Presenter
 import pl.iogreen.confi.model.Talk
@@ -20,8 +22,8 @@ if (params.id) {
         request.talk = new Talk()
     } else if (request.method == "POST") {
         def presenterKey = params.presenterId ? new Key<Presenter>(Presenter.class, params.presenterId as Long) : null
-        def from = new Date()
-        def to = new Date()
+        def from = params.dateFrom ? Date.parse("yyyy-MM-dd'T'kk:mm'Z'", params.dateFrom) : null
+        def to = params.dateTo ? Date.parse("yyyy-MM-dd'T'kk:mm'Z'", params.dateTo) : null
 
         def talk = new Talk(title: params.title, description: params.description, presenterKey: presenterKey, from: from, to: to)
 
