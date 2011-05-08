@@ -28,6 +28,10 @@
             </td>
         </tr>
         <tr>
+            <td><label for="room">Room</label></td>
+            <td><input type="text" name="room" id="room" value="${request.talk?.room ?: ""}"></td>
+        </tr>
+        <tr>
             <td><label for="day">Day</label></td>
             <td><input type="date" name="day" id="day" value="${request.talk?.from?.format("yyyy-MM-dd") ?: ""}"></td>
         </tr>

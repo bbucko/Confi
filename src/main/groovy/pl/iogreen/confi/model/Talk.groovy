@@ -9,6 +9,7 @@ class Talk extends ObgaektifiableLongId implements Serializable, Validatable {
 
     String title
     String description
+    String room
 
     Date from
     Date to
@@ -47,6 +48,10 @@ class Talk extends ObgaektifiableLongId implements Serializable, Validatable {
 
         if (!presenterKey) {
             errors << new Error(field: "presenter", message: "Presenter is required")
+        }
+
+        if (!room) {
+            errors << new Error(field: "room", message: "Room is required")
         }
 
         return errors

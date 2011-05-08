@@ -16,18 +16,22 @@
         </tr>
         <tr>
             <td><label for="description">Description</label></td>
-            <td><textarea rows="20" cols="50" name="description" id="description">${request.talk.description ?: ""}</textarea></td>
+            <td><textarea rows="20" cols="50" name="description" required id="description">${request.talk.description ?: ""}</textarea></td>
         </tr>
         <tr>
             <td><label for="presenterId">Presenter</label></td>
             <td>
-                <select name="presenterId" id="presenterId">
+                <select name="presenterId" id="presenterId" required>
                     <% request.presenters.each { presenter -> %>
                     <option value="${presenter.id}" <% if (request.talk.presenterKey?.id && request.talk.presenterKey.id == presenter.id) { out.print "selected" } %>>${presenter.fullName}</option>
                     <% } %>
                 </select>
 
             </td>
+        </tr>
+        <tr>
+            <td><label for="room">Room</label></td>
+            <td><input type="text" name="room" id="room" value="${request.talk?.room ?: ""}"></td>
         </tr>
         <tr>
             <td><label for="day">Day</label></td>
