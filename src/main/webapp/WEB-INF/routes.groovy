@@ -14,11 +14,11 @@ get "/admin", forward: "/admin/index.groovy"
 
 get "/admin/talks", forward: "/admin/TalksController.groovy"
 
-get "/admin/talk", forward: "/admin/TalkController.groovy"
-post "/admin/talk", forward: "/admin/TalkController.groovy"
+get "/admin/talk", forward: "/admin/CreateTalkController.groovy"
+post "/admin/talk", forward: "/admin/CreateTalkController.groovy"
 
-get "/admin/talk/@id", forward: "/admin/TalkController.groovy?id=@id"
-post "/admin/talk/@id", forward: "/admin/TalkController.groovy?id=@id"
+get "/admin/talk/@id", forward: "/admin/UpdateTalkController.groovy?id=@id"
+post "/admin/talk/@id", forward: "/admin/UpdateTalkController.groovy?id=@id"
 
 get "/admin/presenters", forward: "/admin/PresentersController.groovy"
 
