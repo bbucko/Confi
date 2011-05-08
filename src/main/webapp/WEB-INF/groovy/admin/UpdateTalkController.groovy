@@ -15,6 +15,7 @@ if (request.method == "GET") {
 } else {
     talk.title = params.title
     talk.description = params.description
+    talk.room = params.room
     talk.presenterKey = params.presenterId ? new Key<Presenter>(Presenter.class, params.presenterId as Long) : null
     talk.from = params.dateFrom ? Date.parse("yyyy-MM-dd HH:mm", "${params.day} ${params.dateFrom}") : null
     talk.to = params.dateTo ? Date.parse("yyyy-MM-dd HH:mm", "${params.day} ${params.dateTo}") : null

@@ -15,7 +15,7 @@ if (request.method == "GET") {
     def from = params.dateFrom ? Date.parse("yyyy-MM-dd HH:mm", "${params.day} ${params.dateFrom}") : null
     def to = params.dateTo ? Date.parse("yyyy-MM-dd HH:mm", "${params.day} ${params.dateTo}") : null
 
-    def talk = new Talk(title: params.title, description: params.description, presenterKey: presenterKey, from: from, to: to)
+    def talk = new Talk(title: params.title, description: params.description, presenterKey: presenterKey, room: params.room, from: from, to: to)
     request.errors = talk.validate()
 
     if (!request.errors) {
