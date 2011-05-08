@@ -30,12 +30,16 @@
             </td>
         </tr>
         <tr>
-            <td><label for="dateFrom">Date from</label></td>
-            <td><input type="datetime" name="dateFrom" id="dateFrom" value="${request.talk.from?.format("yyyy-MM-dd'T'kk:mm'Z'") ?: ""}"></td>
+            <td><label for="day">Day</label></td>
+            <td><input type="date" required name="day" id="day" value="${request.talk?.from?.format("yyyy-MM-dd") ?: ""}"></td>
         </tr>
         <tr>
-            <td><label for="dateTo">Date to</label></td>
-            <td><input type="datetime" name="dateTo" id="dateTo" value="${request.talk.to?.format("yyyy-MM-dd'T'kk:mm'Z'") ?: ""}"></td>
+            <td><label for="dateFrom">Hour from</label></td>
+            <td><input type="time" required name="dateFrom" id="dateFrom" value="${request.talk?.from?.format("HH:mm") ?: ""}"></td>
+        </tr>
+        <tr>
+            <td><label for="dateTo">Hour to</label></td>
+            <td><input type="time" required name="dateTo" id="dateTo" value="${request.talk?.to?.format("HH:mm") ?: ""}"></td>
         </tr>
         <tr>
             <td></td>

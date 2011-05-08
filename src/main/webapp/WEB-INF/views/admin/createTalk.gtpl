@@ -25,16 +25,19 @@
                     <option value="${presenter.id}" <% if (request.talk.presenterKey?.id && request.talk.presenterKey.id == presenter.id) { out.print "selected" } %>>${presenter.fullName}</option>
                     <% } %>
                 </select>
-
             </td>
         </tr>
         <tr>
-            <td><label for="dateFrom">Date from</label></td>
-            <td><input type="datetime" name="dateFrom" id="dateFrom" value="${request.talk?.from?.format("yyyy-MM-dd'T'kk:mm'Z'") ?: ""}"></td>
+            <td><label for="day">Day</label></td>
+            <td><input type="date" name="day" id="day" value="${request.talk?.from?.format("yyyy-MM-dd") ?: ""}"></td>
         </tr>
         <tr>
-            <td><label for="dateTo">Date to</label></td>
-            <td><input type="datetime" name="dateTo" id="dateTo" value="${request.talk?.to?.format("yyyy-MM-dd'T'kk:mm'Z'") ?: ""}"></td>
+            <td><label for="dateFrom">Hour from</label></td>
+            <td><input type="time" name="dateFrom" id="dateFrom" value="${request.talk?.from?.format("HH:mm") ?: ""}"></td>
+        </tr>
+        <tr>
+            <td><label for="dateTo">Hour to</label></td>
+            <td><input type="time" name="dateTo" id="dateTo" value="${request.talk?.to?.format("HH:mm") ?: ""}"></td>
         </tr>
         <tr>
             <td></td>

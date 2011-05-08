@@ -19,6 +19,10 @@
             <td><input type="text" name="surname" id="surname" required value="${request.presenter?.surname ?: ""}"/></td>
         </tr>
         <tr>
+            <td><label for="description">Description</label></td>
+            <td><textarea name="description" id="description" rows="20" cols="50">${request.presenter.description ?: ""}</textarea></td>
+        </tr>
+        <tr>
             <td></td>
             <td><input type="submit" value="Add new presenter" name="add"/></td>
         </tr>

@@ -15,13 +15,14 @@ if (params.id) {
         presenter.description = params.description
         presenter.surname = params.surname
         presenter.name = params.name
+        presenter.url = params.url ? params.url as Link : null
+        presenter.email = params.email ? params.email as Email : null
 
         request.errors = presenter.validate()
         if (!request.errors) {
             dao.put presenter
             assert presenter.id != null
 
-            log.info "updated Talk"
             redirect "/admin/presenters"
             return
         }
@@ -35,11 +36,10 @@ if (params.id) {
         def presenter = new Presenter(name: params.name, surname: params.surname, description: params.description, url: params.url as Link, email: params.email as Email)
         request.errors = presenter.validate()
 
-        if (request.errors) {
+        if (!request.errors) {
             dao.put presenter
             assert presenter.id != null
 
-            log.info "saved Presenter"
             redirect "/admin/presenters"
             return
         }
