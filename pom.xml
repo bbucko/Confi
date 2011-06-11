@@ -10,9 +10,9 @@
     <description>Gaelyk Template Project</description>
 
     <properties>
-        <gaelyk.version>0.6.1</gaelyk.version>
+        <gaelyk.version>0.7.0</gaelyk.version>
         <gmaven.version>1.3</gmaven.version>
-        <gae.version>1.4.3</gae.version>
+        <gae.version>1.5.0.1</gae.version>
         <objectify.version>2.2.3</objectify.version>
         <gaeplugin.version>0.8.4</gaeplugin.version>
         <obgaektify.version>0.3</obgaektify.version>
