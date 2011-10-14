@@ -4,7 +4,7 @@
 
     <groupId>pl.iogreen.gaelyk</groupId>
     <artifactId>confi</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>war</packaging>
 
     <description>Gaelyk Template Project</description>
