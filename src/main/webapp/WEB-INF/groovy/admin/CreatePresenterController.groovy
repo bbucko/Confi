@@ -8,7 +8,7 @@ if (request.method == "GET") {
     log.info "create Presenter"
     request.presenter = new Presenter()
 } else if (request.method == "POST") {
-    def presenter = new Presenter(name: params.name, surname: params.surname, description: params.description, url: params.url as Link, email: params.email as Email)
+    def presenter = new Presenter(name: params.name, surname: params.surname, description: params.description, url: params.url as Link, email: params.email as Email, foreignId: null)
     request.errors = presenter.validate()
 
     if (!request.errors) {

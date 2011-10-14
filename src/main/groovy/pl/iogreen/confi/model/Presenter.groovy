@@ -13,6 +13,7 @@ class Presenter extends ObgaektifiableLongId implements Serializable, Validatabl
     String description
     Link url
     Email email
+    Long foreignId
 
     @Transient
     String getFullName() {

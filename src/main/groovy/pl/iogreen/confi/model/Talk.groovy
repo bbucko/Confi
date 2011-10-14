@@ -15,6 +15,7 @@ class Talk extends ObgaektifiableLongId implements Serializable, Validatable {
     Date to
 
     Key<Presenter> presenterKey
+    Long foreignId
 
     @Transient
     Presenter getPresenter() {

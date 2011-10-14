@@ -50,6 +50,8 @@
 
     <security-constraint>
         <web-resource-collection>
+            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/admin</url-pattern>
             <url-pattern>/_ah/mail/*</url-pattern>
             <url-pattern>/_ah/xmpp/message/chat/</url-pattern>
         </web-resource-collection>

@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Add new presenter" name="add"/></td>
+            <td><input type="submit" value="Update presenter" name="update"/></td>
         </tr>
     </table>
 </form>

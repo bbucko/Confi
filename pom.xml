@@ -4,18 +4,17 @@
 
     <groupId>pl.iogreen.gaelyk</groupId>
     <artifactId>confi</artifactId>
-    <version>1</version>
+    <version>1.1</version>
     <packaging>war</packaging>
 
     <description>Gaelyk Template Project</description>
 
     <properties>
         <gaelyk.version>1.0</gaelyk.version>
-        <gmaven.version>1.3</gmaven.version>
-        <gae.version>1.5.2</gae.version>
-        <objectify.version>2.2.3</objectify.version>
-        <!--<objectify.version>3.0</objectify.version>-->
-        <gaeplugin.version>0.8.4</gaeplugin.version>
+        <gmaven.version>1.4-SNAPSHOT</gmaven.version>
+        <gae.version>1.5.5</gae.version>
+        <objectify.version>3.0</objectify.version>
+        <gaeplugin.version>0.9.1</gaeplugin.version>
         <obgaektify.version>0.3</obgaektify.version>
     </properties>
 
@@ -24,6 +23,28 @@
             <groupId>groovyx.gaelyk</groupId>
             <artifactId>gaelyk</artifactId>
             <version>${gaelyk.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-labs</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-java-sdk</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+            <version>${gae.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-java-sdk</artifactId>
+            <version>${gae.version}</version>
+            <type>zip</type>
         </dependency>
 
         <dependency>
@@ -45,6 +66,17 @@
         </dependency>
     </dependencies>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>codehaus.org</id>
+            <url>http://snapshots.repository.codehaus.org</url>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>kurtharriger-gmaven-snapshots</id>
+            <url>https://github.com/kurtharriger/gmaven/raw/maven/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <build>
         <plugins>
@@ -67,7 +99,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0</version>
+                <version>2.3.2</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -86,7 +118,7 @@
                             <goal>testCompile</goal>
                         </goals>
                         <configuration>
-                            <providerSelection>1.7</providerSelection>
+                            <providerSelection>1.8</providerSelection>
                         </configuration>
                     </execution>
                 </executions>
