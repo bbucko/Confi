@@ -3,9 +3,9 @@ import com.google.appengine.api.datastore.Link
 import com.googlecode.objectify.Key
 import pl.iogreen.confi.model.Presenter
 
-println "Importing from ${params.importUrl ?: 'http://localhost:8090/33degree_grails/speaker/list.xml'}"
+println "Importing from ${params.importUrl ?: 'http://2012.33degree.org/speaker/list.xml'}"
 
-def url = (params.importUrl ?: 'http://localhost:8090/33degree_grails/speaker/list.xml').toURL().get()
+def url = (params.importUrl ?: 'http://2012.33degree.org/speaker/list.xml').toURL().get()
 def presenters = new XmlSlurper().parseText(url.text).speaker
 println "Importing ${presenters.size()} presenters... <br />"
 presenters.each {
