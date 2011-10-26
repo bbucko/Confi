@@ -2,9 +2,9 @@ import com.googlecode.objectify.Key
 import pl.iogreen.confi.model.Presenter
 import pl.iogreen.confi.model.Talk
 
-println "Importing from ${params.importUrl ?: 'http://localhost:8090/33degree_grails/talk/list.xml'}"
+println "Importing from ${params.importUrl ?: 'http://2012.33degree.org/talk/list.xml'}"
 
-def url = (params.importUrl ?: 'http://localhost:8090/33degree_grails/talk/list.xml').toURL().get()
+def url = (params.importUrl ?: 'http://2012.33degree.org/talk/list.xml').toURL().get()
 def talks = new XmlSlurper().parseText(url.text).talk.findAll {it.type == 'Talk'}
 println "Importing ${talks.size()} talks... <br />"
 talks.each {
