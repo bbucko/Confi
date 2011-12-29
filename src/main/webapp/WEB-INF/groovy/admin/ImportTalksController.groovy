@@ -7,7 +7,7 @@ println "Importing from ${params.importUrl ?: 'http://2012.33degree.org/talk/lis
 def talksUrl = (params.importUrl ?: 'http://2012.33degree.org/talk/list.xml').toURL().get()
 def talks = new XmlSlurper().parseText(talksUrl.text).talk.findAll {it.type == 'Talk'}
 println "Importing ${talks.size()} talks... <br />"
-
+memcache.clearAll()
 talks.each {
     println "Importing talk: ${it.@id} :: ${it.topic.text()}... "
     def presenter = Presenter.search(filter: ["foreignId = ": it.speaker.@id.toLong()])
@@ -29,20 +29,41 @@ talks.each {
     final String roomId = it.room.@id
 
     if (timeSlotId) {
-        log.info "fetching http://2012.33degree.org/timeslot/show/${timeSlotId}.xml"
-        def timeSlotUrl = (params.timeslotUrl ?: "http://2012.33degree.org/timeslot/show/${timeSlotId}.xml").toURL().get()
-        def timeSlotXml = new XmlSlurper().parseText(timeSlotUrl.text)
+        final timeSlotCacheId = "timeslot${timeSlotId}".toString()
 
-        dateFrom = Date.parse("yyyy-MM-dd HH:mm:ss.SSS z", timeSlotXml.startTime.text())
-        dateTo = Date.parse("yyyy-MM-dd HH:mm:ss.SSS z", timeSlotXml.endTime.text())
+
+
+        if (timeSlotCacheId in memcache) {
+
+            log.info "using memcache for timeSlot: ${timeSlotId}"
+            dateFrom = memcache[timeSlotCacheId][0]
+            dateTo = memcache[timeSlotCacheId][1]
+        } else {
+//            log.info "fetching timeslot: ${timeSlotId}"
+            def timeSlotUrl = (params.timeslotUrl ?: "http://2012.33degree.org/timeslot/show/${timeSlotId}.xml").toURL().get()
+            def timeSlotXml = new XmlSlurper().parseText(timeSlotUrl.text)
+            dateFrom = Date.parse("yyyy-MM-dd HH:mm:ss.SSS z", timeSlotXml.startTime.text())
+            dateTo = Date.parse("yyyy-MM-dd HH:mm:ss.SSS z", timeSlotXml.endTime.text())
+
+            memcache[timeSlotCacheId] = [dateFrom, dateTo]
+            log.info("${timeSlotCacheId in memcache}")
+        }
     }
 
     if (roomId) {
-        log.info "fetching http://2012.33degree.org/room/show/${roomId}.xml"
-        def roomUrl = (params.roomUrl ?: "http://2012.33degree.org/room/show/${roomId}.xml").toURL().get()
-        def roomXml = new XmlSlurper().parseText(roomUrl.text)
+        final roomCacheId = "room${roomId}".toString()
+        if (roomCacheId in memcache) {
+            log.info "using memcache for rom: ${roomId}"
+            room = memcache[roomCacheId]
+        } else {
+//            log.info "fetching room: ${roomId}"
+            def roomUrl = (params.roomUrl ?: "http://2012.33degree.org/room/show/${roomId}.xml").toURL().get()
+            def roomXml = new XmlSlurper().parseText(roomUrl.text)
 
-        room = roomXml.name.text()
+            room = roomXml.name.text()
+            memcache[roomCacheId] = room
+            log.info("${roomCacheId in memcache}")
+        }
     }
 
     if (existingTalk) {
