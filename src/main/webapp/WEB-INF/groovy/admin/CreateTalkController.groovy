@@ -11,6 +11,7 @@ if (request.method == "GET") {
     request.talk = new Talk()
 } else if (request.method == "POST") {
     def presenterKey = params.presenterId ? new Key<Presenter>(Presenter.class, params.presenterId as Long) : null
+    log.info "${params.day} :: ${params.dateFrom} :: ${params.dateTo}"
 
     def from = params.dateFrom ? Date.parse("yyyy-MM-dd HH:mm", "${params.day} ${params.dateFrom}") : null
     def to = params.dateTo ? Date.parse("yyyy-MM-dd HH:mm", "${params.day} ${params.dateTo}") : null

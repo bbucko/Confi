@@ -1,4 +1,6 @@
-get "/", forward: "/index.groovy"
+import groovy.time.TimeCategory
+
+get "/", forward: "/WelcomeController.groovy"
 
 get "/presenters", forward: "/PresentersController.groovy"
 get "/presenters/*", forward: "/PresentersController.groovy"
@@ -34,3 +36,6 @@ get "/favicon.ico", redirect: "/images/gaelyk-small-favicon.png"
 
 all "/_ah/**", ignore: true
 get "*", forward: "/NotFoundController.groovy"
+
+Integer.metaClass.mixin TimeCategory
+Date.metaClass.mixin TimeCategory
