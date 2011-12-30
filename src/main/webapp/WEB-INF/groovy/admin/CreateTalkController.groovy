@@ -13,8 +13,8 @@ if (request.method == "GET") {
     def presenterKey = params.presenterId ? new Key<Presenter>(Presenter.class, params.presenterId as Long) : null
     log.info "${params.day} :: ${params.dateFrom} :: ${params.dateTo}"
 
-    def from = params.dateFrom ? Date.parse("yyyy-MM-dd HH:mm", "${params.day} ${params.dateFrom}") : null
-    def to = params.dateTo ? Date.parse("yyyy-MM-dd HH:mm", "${params.day} ${params.dateTo}") : null
+    def from = params.dateFrom ? Date.parse("yyyy-MM-dd HH:mm z", "${params.day} ${params.dateFrom} CET") : null
+    def to = params.dateTo ? Date.parse("yyyy-MM-dd HH:mm z", "${params.day} ${params.dateTo} CET") : null
 
     def talk = new Talk(title: params.title, description: params.description, presenterKey: presenterKey, room: params.room, from: from, to: to, foreignId: null)
     request.errors = talk.validate()

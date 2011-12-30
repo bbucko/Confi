@@ -7,11 +7,14 @@ final now = new Date()
 final today = new Date().clearTime()
 final tomorrow = (new Date() + 1.day).clearTime()
 
-def previousTalksToday = Talk.search(filter: ["from >=": today, "from <=": now], sort: ["from", "title"])
-def nextTalksOfDay = Talk.search(filter: ["from >=": now, "from <": tomorrow], sort: ["from", "title"], limit: 3)
+def todayTalks = Talk.search(filter: ["from >=": today, "from <": tomorrow], sort: ["from", "title"])
 
-request.nowTalking = previousTalksToday.findAll {Talk talk -> talk.to.after(now)}
-request.nextTalks = nextTalksOfDay
+request.nowTalking = todayTalks.findAll {Talk talk ->
+    talk.from < now && talk.to > now
+}
+request.nextTalks = todayTalks.findAll {Talk talk ->
+    talk.from > now && talk.to > now
+}
 
 log.info("${now} :: ${today} :: ${tomorrow}")
 

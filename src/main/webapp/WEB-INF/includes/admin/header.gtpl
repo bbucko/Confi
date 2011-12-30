@@ -15,3 +15,4 @@
 <body>
 <div>
     <div>
+<% TimeZone.'default'= TimeZone.getTimeZone('CET') //set the default time zone %>

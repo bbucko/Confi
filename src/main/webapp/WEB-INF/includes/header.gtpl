@@ -21,3 +21,4 @@
     </div>
 
     <div data-role="content" data-theme="d">
+    <% TimeZone.'default'= TimeZone.getTimeZone('CET') //set the default time zone %>

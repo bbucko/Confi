@@ -15,7 +15,7 @@
             <td><a href="/admin/talk/${talk.id}">${talk.title}</a></td>
             <td>${talk.presenter.fullName}</td>
             <td>${talk.room}</td>
-            <td>${talk.from.format("yyyy-MM-dd")} :: ${talk.from.format("HH:mm")} - ${talk.to.format("HH:mm")}</td>
+            <td>${talk.from.format("yyyy-MM-dd z")} :: ${talk.from.format("HH:mm")} - ${talk.to.format("HH:mm")}</td>
         </tr>
         <% } %>
     </table>

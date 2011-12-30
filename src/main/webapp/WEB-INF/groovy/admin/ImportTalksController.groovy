@@ -2,6 +2,7 @@ import com.googlecode.objectify.Key
 import pl.iogreen.confi.model.Presenter
 import pl.iogreen.confi.model.Talk
 
+println "<html><body>"
 println "Importing from ${params.importUrl ?: 'http://2012.33degree.org/talk/list.xml'}"
 
 def talksUrl = (params.importUrl ?: 'http://2012.33degree.org/talk/list.xml').toURL().get()
@@ -38,9 +39,9 @@ talks.each {
             dateFrom = memcache[timeSlotCacheId][0]
             dateTo = memcache[timeSlotCacheId][1]
         } else {
-//            log.info "fetching timeslot: ${timeSlotId}"
             def timeSlotUrl = (params.timeslotUrl ?: "http://2012.33degree.org/timeslot/show/${timeSlotId}.xml").toURL().get()
             def timeSlotXml = new XmlSlurper().parseText(timeSlotUrl.text)
+
             dateFrom = Date.parse("yyyy-MM-dd HH:mm:ss.SSS z", timeSlotXml.startTime.text())
             dateTo = Date.parse("yyyy-MM-dd HH:mm:ss.SSS z", timeSlotXml.endTime.text())
 
@@ -55,7 +56,6 @@ talks.each {
             log.info "using memcache for rom: ${roomId}"
             room = memcache[roomCacheId]
         } else {
-//            log.info "fetching room: ${roomId}"
             def roomUrl = (params.roomUrl ?: "http://2012.33degree.org/room/show/${roomId}.xml").toURL().get()
             def roomXml = new XmlSlurper().parseText(roomUrl.text)
 
@@ -89,3 +89,4 @@ println "<br />"
 
 
 println "Import finished"
+println "</body></html>"
