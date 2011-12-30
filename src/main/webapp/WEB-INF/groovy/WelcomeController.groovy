@@ -1,13 +1,18 @@
 import pl.iogreen.confi.model.Talk
 
-request.title = "Welcome to 33 Degree"
+request.title = "Welcome to 33rd Degree 2012"
 request.footer = "Footer"
 
-def today = new Date()
-today.clearTime()
+final now = new Date()
+final today = new Date().clearTime()
+final tomorrow = (new Date() + 1.day).clearTime()
 
-def nowTalking = Talk.search(filter: ["from >= ": today, "from < ": today + 1], sort: ["from", "title"])
-def nextTalks = Talk.search(filter: ["from >= ": today + 1, "from < ": today + 2])
+def previousTalksToday = Talk.search(filter: ["from >=": today, "from <=": now], sort: ["from", "title"])
+def nextTalksOfDay = Talk.search(filter: ["from >=": now, "from <": tomorrow], sort: ["from", "title"], limit: 3)
 
+request.nowTalking = previousTalksToday.findAll {Talk talk -> talk.to.after(now)}
+request.nextTalks = nextTalksOfDay
+
+log.info("${now} :: ${today} :: ${tomorrow}")
 
 forward '/WEB-INF/views/index.gtpl'

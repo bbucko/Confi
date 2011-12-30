@@ -34,7 +34,6 @@ talks.each {
 
 
         if (timeSlotCacheId in memcache) {
-
             log.info "using memcache for timeSlot: ${timeSlotId}"
             dateFrom = memcache[timeSlotCacheId][0]
             dateTo = memcache[timeSlotCacheId][1]
