@@ -12,18 +12,19 @@ presenters.each {
     def existingPresenter = Presenter.search(filter: ["foreignId = ": it.@id.toLong()])
     def presenter
     if (existingPresenter) {
-        println "Found matching presenter. ${existingPresenter}"
+        print "Found matching presenter."
         presenter = existingPresenter[0]
         presenter.name = it.firstName.text()
         presenter.surname = it.lastName.text()
         presenter.description = it.bio.text()
     } else {
-        println "New presenter created."
+        print "New presenter created."
         presenter = new Presenter(name: it.firstName.text(), surname: it.lastName.text(), description: it.bio.text(), url: params.url as Link, email: params.email as Email, foreignId: it.@id.toLong())
     }
 
     if (!presenter.validate()) {
         dao.put presenter
+        println " Talk id: <a href='/admin/presenter/${presenter.id}'>${presenter.id}</a>"
     }
 
     println "<br />"

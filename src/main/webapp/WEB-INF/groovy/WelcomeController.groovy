@@ -7,16 +7,17 @@ final now = new Date()
 final today = new Date().clearTime()
 final tomorrow = (new Date() + 1.day).clearTime()
 
-def todayTalks = Talk.search(filter: ["from >=": today, "from <": tomorrow], sort: ["from", "title"])
-def nextTalks = Talk.search(filter: ["from >=": today], sort: ["from", "title"], limit: 5)
-
-request.nowTalking = todayTalks.findAll {Talk talk ->
-    talk.from < now && talk.to > now
-}
-request.nextTalks = nextTalks.findAll {Talk talk ->
-    talk.from > now && talk.to > now
+final String cacheKey = "todayTalks${today.time}"
+if (cacheKey in memcache) {
+    log.info "Cache found for ${cacheKey}"
+} else {
+    log.info "Cache miss for ${cacheKey}"
+    memcache[cacheKey] = Talk.search(filter: ["from >=": today, "from <": tomorrow], sort: ["from", "title"])
 }
 
-log.info("${now} :: ${today} :: ${tomorrow}")
+final todayTalks = memcache[cacheKey]
+final nextTalks = Talk.search(filter: ["from >=": now], sort: ["from", "title"], limit: 5)
 
+request.nowTalking = todayTalks.findAll {Talk talk -> talk.from < now && talk.to > now }
+request.nextTalks = nextTalks.findAll {Talk talk -> talk.to > now }
 forward '/WEB-INF/views/index.gtpl'

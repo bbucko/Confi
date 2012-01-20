@@ -36,6 +36,7 @@ talks.each {
             dateFrom = memcache[timeSlotCacheId][0]
             dateTo = memcache[timeSlotCacheId][1]
         } else {
+            log.info("memcache miss for ${timeSlotId}")
             def timeSlotUrl = (params.timeslotUrl ?: "http://2012.33degree.org/timeslot/show/${timeSlotId}.xml").toURL().get()
             def timeSlotXml = new XmlSlurper().parseText(timeSlotUrl.text)
 
@@ -43,7 +44,7 @@ talks.each {
             dateTo = Date.parse("yyyy-MM-dd HH:mm:ss.SSS z", timeSlotXml.endTime.text())
 
             memcache[timeSlotCacheId] = [dateFrom, dateTo]
-            log.info("${timeSlotCacheId in memcache}")
+
         }
     }
 
@@ -63,7 +64,7 @@ talks.each {
     }
 
     if (existingTalk) {
-        println "Found matching talk... Talk id: <a href='/admin/talk/${existingTalk.id[0]}'>${existingTalk.id[0]}</a>"
+        println "Found matching talk. "
         talk = existingTalk[0]
         talk.title = it.topic.text()
         talk.description = it.description.text()
@@ -72,12 +73,13 @@ talks.each {
         talk.to = dateTo
         talk.room = room
     } else {
-        println "New talk created."
+        println "New talk created. "
         talk = new Talk(description: it.description.text(), title: it.topic.text(), foreignId: it.@id.toLong(), from: dateFrom, to: dateTo, presenterKey: presenterKey, room: room)
     }
 
     if (!talk.validate()) {
         dao.put talk
+        println "Talk id: <a href='/admin/talk/${talk.id}'>${talk.id}</a>"
     } else {
         talk.validate().each {println it.message}
     }
