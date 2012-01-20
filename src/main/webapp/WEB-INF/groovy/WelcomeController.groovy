@@ -1,6 +1,6 @@
 import pl.iogreen.confi.model.Talk
 
-request.title = "Welcome to 33rd Degree 2012"
+request.title = "33rd Degree 2012"
 request.footer = "Footer"
 
 final now = new Date()
@@ -8,11 +8,12 @@ final today = new Date().clearTime()
 final tomorrow = (new Date() + 1.day).clearTime()
 
 def todayTalks = Talk.search(filter: ["from >=": today, "from <": tomorrow], sort: ["from", "title"])
+def nextTalks = Talk.search(filter: ["from >=": today], sort: ["from", "title"], limit: 5)
 
 request.nowTalking = todayTalks.findAll {Talk talk ->
     talk.from < now && talk.to > now
 }
-request.nextTalks = todayTalks.findAll {Talk talk ->
+request.nextTalks = nextTalks.findAll {Talk talk ->
     talk.from > now && talk.to > now
 }
 

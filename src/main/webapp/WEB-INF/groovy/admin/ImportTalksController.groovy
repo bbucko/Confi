@@ -31,9 +31,6 @@ talks.each {
 
     if (timeSlotId) {
         final timeSlotCacheId = "timeslot${timeSlotId}".toString()
-
-
-
         if (timeSlotCacheId in memcache) {
             log.info "using memcache for timeSlot: ${timeSlotId}"
             dateFrom = memcache[timeSlotCacheId][0]
@@ -66,7 +63,7 @@ talks.each {
     }
 
     if (existingTalk) {
-        println "Found matching talk. ${existingTalk}"
+        println "Found matching talk... Talk id: <a href='/admin/talk/${existingTalk.id[0]}'>${existingTalk.id[0]}</a>"
         talk = existingTalk[0]
         talk.title = it.topic.text()
         talk.description = it.description.text()
@@ -84,8 +81,9 @@ talks.each {
     } else {
         talk.validate().each {println it.message}
     }
+    println "<br />"
 }
-println "<br />"
+
 
 
 println "Import finished"

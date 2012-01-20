@@ -4,20 +4,19 @@ Integer.metaClass.mixin TimeCategory
 Date.metaClass.mixin TimeCategory
 
 get "/", forward: "/WelcomeController.groovy", cache: 5.minutes
-get "/about", forward: "/AboutController.groovy"
-//, cache: (24 * 10).hours
+get "/about", forward: "/AboutController.groovy", cache: 24.hours
 
-get "/presenters", forward: "/PresentersController.groovy", cache: 24.hours
-get "/presenters/*", forward: "/PresentersController.groovy", cache: 24.hours
+get "/presenters", forward: "/PresentersController.groovy"
+get "/presenters/*", forward: "/PresentersController.groovy"
 
-get "/presenter/@id", forward: "/ViewPresenterController.groovy?id=@id", cache: 24.hours
+get "/presenter/@id", forward: "/ViewPresenterController.groovy?id=@id", cache: 2.hours
 
-get "/talks", forward: "/TalksController.groovy", cache: 24.hours
-get "/talks/*", forward: "/TalksController.groovy", cache: 24.hours
+get "/talks", forward: "/TalksController.groovy", cache: 2.hours
+get "/talks/*", forward: "/TalksController.groovy", cache: 2.hours
 
-get "/talk/@id", forward: "/ViewTalkController.groovy?id=@id", cache: 24.hours
+get "/talk/@id", forward: "/ViewTalkController.groovy?id=@id", cache: 2.hours
 
-get "/admin", forward: "/admin/index.groovy", cache: (365 * 24).hours
+get "/admin", forward: "/admin/index.groovy"
 
 get "/admin/talks", forward: "/admin/ListTalksController.groovy"
 get "/admin/import/talks", forward: "/admin/ImportTalksController.groovy"
@@ -37,7 +36,7 @@ post "/admin/presenter", forward: "/admin/CreatePresenterController.groovy"
 get "/admin/presenter/@id", forward: "/admin/UpdatePresenterController.groovy?id=@id"
 post "/admin/presenter/@id", forward: "/admin/UpdatePresenterController.groovy?id=@id"
 
-get "/favicon.ico", redirect: "/images/gaelyk-small-favicon.png", cache: (365 * 24).hours
+get "/favicon.ico", redirect: "/images/gaelyk-small-favicon.png"
 
 all "/_ah/**", ignore: true
 get "*", forward: "/NotFoundController.groovy"
