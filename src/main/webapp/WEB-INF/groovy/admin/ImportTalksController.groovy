@@ -5,8 +5,8 @@ import pl.iogreen.confi.model.Talk
 println "<html><body>"
 println "Importing from ${params.importUrl ?: 'http://2012.33degree.org/talk/list.xml'}"
 
-def talksUrl = (params.importUrl ?: 'http://2012.33degree.org/talk/list.xml').toURL().get()
-def talks = new XmlSlurper().parseText(talksUrl.text).talk.findAll {it.type == 'Talk'}
+def talksUrl = (params.importUrl ?: 'http://2012.33degree.org/talk/list.xml').toURL()
+def talks = new XmlSlurper().parseText(talksUrl.getText("ISO-8859-1")).talk.findAll {it.type == 'Talk'}
 println "Importing ${talks.size()} talks... <br />"
 memcache.clearAll()
 talks.each {

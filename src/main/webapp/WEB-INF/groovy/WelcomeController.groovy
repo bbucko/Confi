@@ -1,6 +1,6 @@
 import pl.iogreen.confi.model.Talk
 
-request.title = "33rd Degree 2012"
+request.title = "ConfiSchedule"
 request.footer = "Footer"
 
 final now = new Date()

@@ -1,12 +1,11 @@
 import com.google.appengine.api.datastore.Email
 import com.google.appengine.api.datastore.Link
-import com.googlecode.objectify.Key
 import pl.iogreen.confi.model.Presenter
 
 println "Importing from ${params.importUrl ?: 'http://2012.33degree.org/speaker/list.xml'}"
 
-def url = (params.importUrl ?: 'http://2012.33degree.org/speaker/list.xml').toURL().get()
-def presenters = new XmlSlurper().parseText(url.text).speaker
+def url = (params.importUrl ?: 'http://2012.33degree.org/speaker/list.xml').toURL()
+def presenters = new XmlSlurper().parseText(url.getText("ISO-8859-1")).speaker
 println "Importing ${presenters.size()} presenters... <br />"
 presenters.each {
     println "Importing presenter: ${it.@id} :: ${it.firstName.text()} ${it.lastName.text()}... "
