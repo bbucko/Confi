@@ -9,10 +9,10 @@
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
 
-    <inbound-services>
+    <!--<inbound-services>-->
         <!--<service>xmpp_message</service>-->
         <!--<service>mail</service>-->
-    </inbound-services>
+    <!--</inbound-services>-->
 
     <precompilation-enabled>true</precompilation-enabled>
 

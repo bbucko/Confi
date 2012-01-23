@@ -1,5 +1,3 @@
-<% include '/WEB-INF/includes/admin/header.gtpl' %>
-
 <% if (!request.talks) { %>
     No talks found
 <% } else { %>
@@ -20,5 +18,3 @@
         <% } %>
     </table>
 <% } %>
-
-<% include '/WEB-INF/includes/footer.gtpl' %>

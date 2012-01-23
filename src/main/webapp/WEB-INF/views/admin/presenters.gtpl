@@ -1,5 +1,3 @@
-<% include '/WEB-INF/includes/admin/header.gtpl' %>
-
 <% if (!request.presenters) { %>
 No presenters found
 <% } else { %>
@@ -16,5 +14,3 @@ No presenters found
     <% } %>
 </table>
 <% } %>
-
-<% include '/WEB-INF/includes/footer.gtpl' %>

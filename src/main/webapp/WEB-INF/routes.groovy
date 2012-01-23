@@ -1,5 +1,6 @@
 import groovy.time.TimeCategory
 
+TimeZone.default = TimeZone.getTimeZone('CET')
 Integer.metaClass.mixin TimeCategory
 Date.metaClass.mixin TimeCategory
 

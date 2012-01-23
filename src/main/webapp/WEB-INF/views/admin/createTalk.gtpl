@@ -1,4 +1,3 @@
-<% include '/WEB-INF/includes/admin/header.gtpl' %>
 <% if (request.errors) {
     out.print "<div class='error'>"
     request.errors.each {
@@ -50,5 +49,3 @@
     </table>
 
 </form>
-
-<% include '/WEB-INF/includes/footer.gtpl' %>

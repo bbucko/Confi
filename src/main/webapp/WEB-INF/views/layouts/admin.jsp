@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +11,10 @@
         jQuery(function () {
         });
     </script>
+    <decorator:head/>
 </head>
 
 <body>
-<div>
-    <div>
-<% TimeZone.'default'= TimeZone.getTimeZone('CET') //set the default time zone %>
+<decorator:body/>
+</body>
+</html>

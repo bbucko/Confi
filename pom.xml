@@ -23,29 +23,7 @@
             <groupId>groovyx.gaelyk</groupId>
             <artifactId>gaelyk</artifactId>
             <version>${gaelyk.version}</version>
-            <!--<exclusions>-->
-            <!--<exclusion>-->
-            <!--<groupId>com.google.appengine</groupId>-->
-            <!--<artifactId>appengine-api-labs</artifactId>-->
-            <!--</exclusion>-->
-            <!--<exclusion>-->
-            <!--<groupId>com.google.appengine</groupId>-->
-            <!--<artifactId>appengine-java-sdk</artifactId>-->
-            <!--</exclusion>-->
-            <!--</exclusions>-->
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.google.appengine</groupId>-->
-        <!--<artifactId>appengine-api-labs</artifactId>-->
-        <!--<version>${gae.version}</version>-->
-        <!--<type>jar</type>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.google.appengine</groupId>-->
-        <!--<artifactId>appengine-java-sdk</artifactId>-->
-        <!--<version>${gae.version}</version>-->
-        <!--<type>zip</type>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>com.googlecode.objectify</groupId>
@@ -63,6 +41,23 @@
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
         </dependency>
     </dependencies>
 
@@ -86,6 +81,7 @@
                 <version>${gaeplugin.version}</version>
                 <configuration>
                     <serverId>appengine.google.com</serverId>
+                    <unpackVersion>${gae.version}</unpackVersion>
                 </configuration>
                 <executions>
                     <execution>
@@ -95,6 +91,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.google.appengine</groupId>
+                        <artifactId>appengine-tools-sdk</artifactId>
+                        <version>${gae.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -111,6 +114,7 @@
                 <version>${gmaven.version}</version>
                 <configuration>
                     <providerSelection>1.8</providerSelection>
+                    <source/>
                 </configuration>
                 <executions>
                     <execution>
