@@ -4,13 +4,16 @@ request.title = "Talks"
 request.footer = "Footer"
 
 def today = new Date()
+final tomorrow = (new Date() + 1.day).clearTime()
 today.clearTime()
-
-def foundTodayTalks = Talk.search(filter: ["from >= ": today, "from < ": today + 1], sort: ["from", "title"])
-//def foundTomorrowTalks = Talk.search(filter: ["from >= ": today + 1, "from < ": today + 2])
+final String cacheKey = "todayTalks${today.time}"
+if (!cacheKey in memcache) {
+    log.info "Cache miss for ${cacheKey}"
+    memcache[cacheKey] = Talk.search(filter: ["from >=": today, "from <": tomorrow], sort: ["from", "title"])
+}
 
 request.talks = [
-        "today": foundTodayTalks.groupBy {Talk talk -> talk.from.format("HH:00")}
+        "today": memcache[cacheKey].groupBy {Talk talk -> talk.from.format("HH:00")}
 ]
 
 forward '/WEB-INF/views/talks.gtpl'
