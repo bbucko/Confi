@@ -25,10 +25,6 @@
     </li>
     <% }
     }%>
-    <li data-role="list-divider">Other info</li>
-    <li><a href="/presenters">Presenters</a></li>
-    <li><a href="/talks">Talks</a></li>
-    <li><a href="/about">About</a></li>
 </ul>
 
 <% include '/WEB-INF/includes/footer.gtpl' %>

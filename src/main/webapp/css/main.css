@@ -1,4 +1,16 @@
 body {
-    font-family: Arial,serif;
+    font-family: Arial, serif;
     color: black;
+}
+
+.logo {
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    max-width: 512px;
+}
+
+.logo img {
+    width: 100%;
 }
