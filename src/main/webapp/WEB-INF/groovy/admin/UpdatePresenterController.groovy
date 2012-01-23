@@ -23,6 +23,7 @@ if (request.method == "GET") {
         assert presenter.id != null
 
         redirect "/admin/presenters"
+        memcache.clearAll()
         return
     }
     forward '/WEB-INF/views/admin/createPresenter.gtpl'

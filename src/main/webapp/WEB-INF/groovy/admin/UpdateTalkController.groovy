@@ -27,6 +27,7 @@ if (request.method == "GET") {
 
         log.info "updated Talk"
         redirect "/admin/talks"
+        memcache.clearAll()
         return
     }
 

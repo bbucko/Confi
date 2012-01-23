@@ -5,17 +5,17 @@ request.footer = "Footer"
 
 final now = new Date()
 final today = new Date().clearTime()
-final tomorrow = (new Date() + 1.day).clearTime()
+final tomorrow = today + 1.day
 
 final String cacheKey = "todayTalks${today.time}"
-if (!cacheKey in memcache) {
+if (!(cacheKey in memcache)) {
     log.info "Cache miss for ${cacheKey}"
     memcache[cacheKey] = Talk.search(filter: ["from >=": today, "from <": tomorrow], sort: ["from", "title"])
 }
 
-final todayTalks = memcache[cacheKey]
 final nextTalks = Talk.search(filter: ["from >=": now], sort: ["from", "title"], limit: 5)
+final nowTalking = memcache[cacheKey].findAll {Talk talk -> talk.from <= now && talk.to > now }
 
-request.nowTalking = todayTalks.findAll {Talk talk -> talk.from < now && talk.to > now }
-request.nextTalks = nextTalks.findAll {Talk talk -> talk.to > now }
+request.nowTalking = nowTalking
+request.nextTalks = nextTalks
 forward '/WEB-INF/views/index.gtpl'

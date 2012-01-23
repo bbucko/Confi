@@ -3,8 +3,8 @@
         <div data-role="navbar">
             <ul>
                 <li><a data-icon="star" href="/presenters">Presenters</a></li>
-                <li><a data-icon="grid" href="/talks">Talks</a></li>
-                <li><a data-icon="info" href="/about" >About</a></li>
+                <li><a data-icon="grid" href="/" >Home</a></li>
+                <li><a data-icon="info" href="/talks">Talks</a></li>
             </ul>
         </div>
     </div>

@@ -17,7 +17,8 @@
 <div data-role="page" data-add-back-btn="true" data-fullscreen="true">
     <div data-role="header" data-theme="a">
         <h1><%=request.title ?: "Page Title"%></h1>
-        <a href="/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+        <a href="/about" data-icon="info" class="ui-btn-right">About</a>
+        <a href="/" data-icon="grid" class="ui-btn-left">Home</a>
     </div>
 
     <div data-role="content" data-theme="d">

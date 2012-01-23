@@ -7,7 +7,7 @@ def today = new Date()
 final tomorrow = (new Date() + 1.day).clearTime()
 today.clearTime()
 final String cacheKey = "todayTalks${today.time}"
-if (!cacheKey in memcache) {
+if (!(cacheKey in memcache)) {
     log.info "Cache miss for ${cacheKey}"
     memcache[cacheKey] = Talk.search(filter: ["from >=": today, "from <": tomorrow], sort: ["from", "title"])
 }
