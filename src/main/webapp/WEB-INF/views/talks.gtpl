@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta name="title" content="Talks">
+    <meta name="pageType" content="talks">
 </head>
 
 <body>

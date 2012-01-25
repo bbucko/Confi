@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta name="title" content="Presenters">
+    <meta name="pageType" content="presenters">
 </head>
 
 <body>

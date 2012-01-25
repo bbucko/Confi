@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="title" content="Conference Schedule">
-    <meta name="homepage" content="true">
+    <meta name="pageType" content="home">
 </head>
 
 <body>
