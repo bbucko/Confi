@@ -28,9 +28,10 @@
         <a href="/talk/${talk.id}">
             <h3>${talk.title}</h3>
 
-            <p><strong>${talk.presenter.fullName}</strong></p>
-
-            <p>${talk.from.format("HH:mm")} - ${talk.to.format("HH:mm")} :: <strong>${talk.room}</strong></p>
+            <p>
+                ${talk.from.format("HH:mm")} - ${talk.to.format("HH:mm")} in <strong>${talk.room}</strong>
+                <span class="ui-li-aside"><strong>${talk.presenter.fullName}</strong></span>
+            </p>
         </a>
     </li>
     <% }

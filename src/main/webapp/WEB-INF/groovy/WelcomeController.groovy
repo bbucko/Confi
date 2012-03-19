@@ -14,7 +14,16 @@ if (!(cacheKey in memcache)) {
 }
 
 final nextTalks = Talk.search(filter: ["from >=": now], sort: ["from", "title"], limit: 5)
-final nowTalking = memcache[cacheKey].findAll {Talk talk -> talk.from <= now && talk.to > now }
+def nowTalking
+
+try {
+    nowTalking = memcache[cacheKey].findAll {Talk talk -> talk.from <= now && talk.to > now }
+} catch (Exception ex) {
+    log.info("Exception occured while retrieving stuff from memcache")
+    memcache[cacheKey] = Talk.search(filter: ["from >=": today, "from <": tomorrow], sort: ["from", "title"])
+    nowTalking = memcache[cacheKey].findAll {Talk talk -> talk.from <= now && talk.to > now }
+}
+
 
 request.nowTalking = nowTalking
 request.nextTalks = nextTalks
